@@ -1,0 +1,39 @@
+#!/usr/local/bin/phantomjs
+
+var url = 'http://localhost:3000';
+var page = require('webpage').create();
+var pageCreator = require('webpage');
+
+page.open(url, function (status) {
+  page.onConsoleMessage = function (msg) { 
+    if(msg === "exit") {
+      phantom.exit();
+//    } else if(msg === '.') {
+  //    system.stdout.write('.');
+    } else {
+      console.log(msg);
+    }
+  };
+
+  page.evaluate(function() {
+    setTimeout(function () {
+      var numIters = 500;
+      var id = draggableThings.findOne({})._id;
+      
+      var i = 1;
+      var update = function () {
+        draggableThings.update({ _id: id }, {$set: { name: "Changed " + i }},
+          function (err) {
+            if(i < numIters) {
+              i = i+1;
+              update();
+            } else {
+              console.log('exit');
+            }
+          }
+        );
+      };
+      update();
+    },1000);
+  });
+});

@@ -1,0 +1,20 @@
+<head>
+  <title>draggableMemLeak</title>
+</head>
+
+<body>
+  {{> main}}
+</body>
+
+<template name="main">
+    <div>
+        <ul>
+            {{#each draggableThings}}
+                <li class="dragMe">{{name}}</li>
+            {{/each}}
+        </ul>
+    </div>
+    <div class="dropHere">
+        Drop things here
+    </div>
+</template>

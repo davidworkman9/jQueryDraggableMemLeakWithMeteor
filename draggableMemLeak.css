@@ -1,0 +1,8 @@
+div {
+    display: inline-block;
+}
+
+.dropHere {
+    border: 1px solid black;
+    float: right;
+}
